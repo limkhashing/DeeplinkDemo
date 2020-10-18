@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="io.limkhashing.deeplinkdemo"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+<!--    https://developer.android.com/training/app-links/deep-linking-->
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.DeeplinkDemo">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Deeplink -->
+        <activity android:name=".DeepLinkActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "demo://io.github.limkhashing" -->
+                <data
+                    android:scheme="demo"
+                    android:host="io.github.limkhashing" />
+            </intent-filter>
+
+            <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https"
+                    android:host="www.example.com"
+                    android:pathPrefix="/gizmos" />
+            </intent-filter>
+
+
+            <!-- It actually supports
+              1. https://www.example.com
+              2. app://open.my.app
+              and these
+              1. app://www.example.com
+              2. https://open.my.app
+
+            <intent-filter>
+                <data android:scheme="https" android:host="www.example.com" />
+                <data android:scheme="app" android:host="open.my.app" />
+            </intent-filter>
+
+            -->
+
+        </activity>
+    </application>
+
+</manifest>
